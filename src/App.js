@@ -1,5 +1,5 @@
 import './App.css';
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,26 +12,25 @@ import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Login from './components/Login/Login';
 import NotFound from './components/NotFound/NotFound';
-import fakeData from './fakeData/fakeData';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
 
 function App() {
 
-  const [transports, setTransports] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState({});
-    useEffect(() =>{
-        setTransports(fakeData)
-    },[])
+    
 
   return (
-    <UserContext.Provider value={[transports, setTransports, loggedInUser, setLoggedInUser]}>
+    <UserContext.Provider value={[ loggedInUser, setLoggedInUser]}>
     <Router>
         <Switch>
             <Route path="/home">
                 <Home></Home>
             </Route>
+            <PrivateRoute path="/book/:bookName">
+                <Destination></Destination>
+            </PrivateRoute>
             <PrivateRoute path="/destination">
                 <Destination></Destination>
             </PrivateRoute>

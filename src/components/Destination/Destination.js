@@ -13,6 +13,7 @@ const Destination = () => {
                     <Link to="/login"><li className="login-li">Login</li></Link>
                 </ul>
             </header>
+            <h1>Destination</h1>
         </div>
     );
 };

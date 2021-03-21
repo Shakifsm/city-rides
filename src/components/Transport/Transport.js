@@ -1,11 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Transport = (props) => {
-    const { image } = props.transport
+    const { image, name } = props.transport
     console.log(props);
     return (
         <div>
-                <img style={{width:"70%"}} src={image} alt=""/>            
+                <Link to={`/book/${name}`}>
+                    <img style={{width:"70%"}} src={image} alt=""/>
+                    <div style={{textAlign:"center"}}>
+                        <p>{name}</p>
+                    </div>   
+                </Link>  
         </div>
     );
 };

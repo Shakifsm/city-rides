@@ -1,4 +1,5 @@
-const fakeData = [{
+const fakeData = [
+  {
     "id": 1,
     "name": "Bike",
     "image": "https://i.ibb.co/mXd1y9F/Frame.png",

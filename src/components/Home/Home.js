@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../App';
+import fakeData from '../../fakeData/fakeData';
 import Transport from '../Transport/Transport';
 import "./Home.css";
 
 const Home = () => {
     
-    const[transports, setTransports] = useContext(UserContext);
+    const[transports, setTransports] = useState([]);
+    useEffect(() =>{
+        setTransports(fakeData)
+    },[])
     
+
     return (
         <div className="parent">
             <header>

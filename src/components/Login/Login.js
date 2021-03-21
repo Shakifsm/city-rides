@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
@@ -10,6 +10,13 @@ import { UserContext } from '../../App';
 
 const Login = () => {
 
+    const [user, setUser] = useState({
+        isSignedIn: false,
+        name: "",
+        email: "",
+        password: ""
+    })
+
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const history = useHistory();
     const location = useLocation();
@@ -20,9 +27,9 @@ const Login = () => {
     }
 
     const googleSignIn = () => {
-        var provider = new firebase.auth.GoogleAuthProvider();
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
         firebase.auth()
-            .signInWithPopup(provider)
+            .signInWithPopup(googleProvider)
             .then((result) => {
                 /** @type {firebase.auth.OAuthCredential} */
                 var credential = result.credential;
@@ -46,6 +53,45 @@ const Login = () => {
             });
     }
 
+    const handleBlur = (e) => {
+        let isFormValid;
+        if (e.target.name === "email") {
+            const re = /\S+@\S+\.\S+/;
+            isFormValid = re.test(e.target.value);
+        }
+        if (e.target.name === "password") {
+            const isPasswordValid = e.target.value.length >= 6;
+            const reg = /\d{1}/;
+            const passwordHasNumber = reg.test(e.target.value);
+
+            isFormValid = isPasswordValid && passwordHasNumber;
+        }
+        if (isFormValid) {
+            const newUserInfo = { ...user };
+            newUserInfo[e.target.name] = e.target.value;
+            setUser(newUserInfo)
+        }
+    }
+
+    const handleSubmit = (e) => {
+        if (user.email && user.password) {
+            firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+                .then((userCredential) => {
+                    // Signed in 
+                    var user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // ..
+                    console.log(errorCode, errorMessage);
+                });
+        }
+        e.preventDefault();
+    }
+
+
     return (
         <div>
             <header>
@@ -67,25 +113,27 @@ const Login = () => {
                                         <h3>Login</h3>
                                     </div>
                                     <div className="input-area">
-                                        <input type="email" name="" id="" placeholder="Email" className="email" />
-                                        <br />
-                                        <br />
-                                        <input type="password" name="" placeholder="Password" className="password" id="" />
-                                        <br />
-                                        <br />
-                                        <input type="checkbox" className="remember" name="remember" id="" />
-                                        <label htmlFor="remember">Remember Me</label>
-                                        <br />
-                                        <br />
-                                        <input type="submit" className="login-input" value="Login" />
-                                        <div className="sign-up d-flex">
-                                            <div className="div">
-                                                <p>Don't have an account?</p>
+                                        <form onSubmit={handleSubmit} action="">
+                                            <input onBlur={handleBlur} type="email" name="email" id="" placeholder="Email" className="email" />
+                                            <br />
+                                            <br />
+                                            <input onBlur={handleBlur} type="password" name="password" placeholder="Password" className="password" id="" />
+                                            <br />
+                                            <br />
+                                            <input type="checkbox" className="remember" name="remember" id="" />
+                                            <label htmlFor="remember">Remember Me</label>
+                                            <br />
+                                            <br />
+                                            <input type="submit" className="login-input" value="Login" />
+                                            <div className="sign-up d-flex">
+                                                <div className="div">
+                                                    <p>Don't have an account?</p>
+                                                </div>
+                                                <div className="create-account">
+                                                    <p>Create an account</p>
+                                                </div>
                                             </div>
-                                            <div className="create-account">
-                                                <p>Create an account</p>
-                                            </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <p className="or">---------------------------or---------------------------</p>
