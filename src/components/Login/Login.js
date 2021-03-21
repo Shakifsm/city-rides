@@ -110,27 +110,30 @@ const Login = () => {
                             <div className="parent-div">
                                 <div className="login-with-email-area">
                                     <div className="title-area">
-                                        <h3>Login</h3>
+                                        <h3>Crerte an account</h3>
                                     </div>
                                     <div className="input-area">
                                         <form onSubmit={handleSubmit} action="">
-                                            <input onBlur={handleBlur} type="email" name="email" id="" placeholder="Email" className="email" />
+                                            <input type="text" name="name" placeholder="Enter your name" className="input-field"/>
+                                            <br/>
+                                            <br/>
+                                            <input onBlur={handleBlur} type="email" name="email" id="" placeholder="Email" className="input-field" />
                                             <br />
                                             <br />
-                                            <input onBlur={handleBlur} type="password" name="password" placeholder="Password" className="password" id="" />
+                                            <input onBlur={handleBlur} type="password" name="password" placeholder="Password" className="input-field" id="" />
                                             <br />
                                             <br />
-                                            <input type="checkbox" className="remember" name="remember" id="" />
+                                            {/* <input type="checkbox" className="remember" name="remember" id="" />
                                             <label htmlFor="remember">Remember Me</label>
                                             <br />
-                                            <br />
-                                            <input type="submit" className="login-input" value="Login" />
+                                            <br /> */}
+                                            <input type="submit" className="sign-up-input" value="Sign Up" />
                                             <div className="sign-up d-flex">
                                                 <div className="div">
                                                     <p>Don't have an account?</p>
                                                 </div>
                                                 <div className="create-account">
-                                                    <p>Create an account</p>
+                                                    <button className="exixting-user-btn">Login</button>
                                                 </div>
                                             </div>
                                         </form>

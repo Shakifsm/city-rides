@@ -22,20 +22,14 @@
     padding-bottom: 40px;
 }
 
-.email{
+.input-field{
     border: none;
     border-bottom: 1px solid gray;
     outline: none;
     width: 100%;
 }
 
-.password{
-    border: none;
-    border-bottom: 1px solid gray;
-    outline: none;
-    width: 100%;
-}
-.login-input{
+.sign-up-input{
     background-color: tomato;
     border: none;
     color: white;
@@ -43,17 +37,12 @@
     padding: 7px 0px;
 }
 
-.remember{
+/* .remember{
     margin-right: 10px;
-}
+} */
 
 .sign-up {
     margin-top: 20px;
-}
-
-.create-account{
-    color: tomato;
-    margin-left: 3px;
 }
 
 .or{
@@ -66,4 +55,10 @@
     border-radius: 20px;
     background-color: white;
     padding: 7px 0px;
+}
+
+.exixting-user-btn{
+    border: none;
+    color: coral;
+    background-color: white;
 }

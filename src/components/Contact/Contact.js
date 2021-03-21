@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const Contact = () => {
+
+   
+
     return (
         <div>
             <header>
@@ -13,6 +17,9 @@ const Contact = () => {
                     <Link to="/login"><li className="login-li">Login</li></Link>
                 </ul>
             </header>
+
+            
+           
         </div>
     );
 };
